@@ -20,4 +20,9 @@ public class ActividadHibrida extends Actividad {
         return TipoActividad.PRESENCIAL;
     }
 
+    public int compareTo(Actividad a){
+        return Integer.compare(this.getCuposDisponibles(), a.getCuposDisponibles());
+    }
+
+
 }

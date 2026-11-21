@@ -60,8 +60,5 @@ public abstract class Actividad implements Cobrable, Comparable<Actividad> {
                 codigo, nombre, getTipo(), calcularTarifaFinal(), inscritos, cupoTotal);
     }
 
-    public int compareTo(List<T> a) {
-        return Collections.sort(a);
-    }
 
 }

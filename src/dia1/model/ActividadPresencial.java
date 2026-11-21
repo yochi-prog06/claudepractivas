@@ -16,6 +16,9 @@ public class ActividadPresencial extends Actividad {
     @Override
     public TipoActividad getTipo() { return TipoActividad.PRESENCIAL; }
 
+    public int compareTo(Actividad a){
+        return Integer.compare(this.getCuposDisponibles(), a.getCuposDisponibles());
+    }
 
 
 }

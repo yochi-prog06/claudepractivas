@@ -2,6 +2,8 @@ package dia1;
 
 import dia1.model.*;
 import dia1.service.Gestor;
+
+import java.util.Collections;
 import java.util.Comparator;
 
 public class Main {
@@ -9,6 +11,9 @@ public class Main {
         Gestor<Actividad> gestor = new Gestor<>();
         gestor.agregar(new ActividadPresencial("A01", "Fotografia", 5000, 2, 0));
         gestor.agregar(new ActividadVirtual("A02", "Excel basico", 4000, 3, 0));
+        gestor.agregar(new ActividadHibrida("A03", "SCRUM", 6000, 5, 2));
+        gestor.agregar(new ActividadHibrida("A05", "Calculo I", 7500, 7, 2));
+        gestor.agregar(new ActividadHibrida("A06", "MySQL", 5200, 8, 1));
 
         // 1. Polimorfismo: referencia Actividad, metodo de la subclase real
         for (Actividad a : gestor.listar()) System.out.println(a);
@@ -19,6 +24,8 @@ public class Main {
         a01.inscribir();
         try { a01.inscribir(); }
         catch (IllegalStateException e) { System.out.println("Rechazado: " + e.getMessage()); }
+
+        Actividad a02 = gestor.buscarPrimero(a -> a.getCodigo().equalsIgnoreCase(" a02 ".trim())).orElseThrow();
 
         // 3. Optional: ausencia sin null
         System.out.println(gestor.buscarPrimero(a -> a.getCodigo().equals("Z99"))
@@ -45,7 +52,19 @@ public class Main {
         catch (IllegalArgumentException e) { System.out.println("Inválido: " + e.getMessage()); }
 
         // 8. Contar
-        System.out.println("Numero: " + gestor.contar(a -> a.getTipo() == TipoActividad.VIRTUAL));
+        System.out.println("Numero : " + gestor.contar(a -> a.getTipo() == TipoActividad.VIRTUAL));
+
+        System.out.println(a02.compareTo(a01));
+
+        for (Actividad a : gestor.listar()) System.out.println(a);
+
+        System.out.println("ordenado");
+        Collections.sort(gestor.listar());
+
+        for (Actividad a : gestor.listar()) System.out.println(a);
+
+        double TotalRecaudado = gestor.listar().stream().mapToDouble(Actividad::calcularTarifaFinal).sum();
+        System.out.println("Total recaudad: " + TotalRecaudado);
     }
 
 }
