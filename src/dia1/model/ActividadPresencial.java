@@ -1,5 +1,6 @@
 package dia1.model;
 
+import java.util.Collections;
 
 
 public class ActividadPresencial extends Actividad {
@@ -14,7 +15,6 @@ public class ActividadPresencial extends Actividad {
 
     @Override
     public TipoActividad getTipo() { return TipoActividad.PRESENCIAL; }
-
 
 
 }

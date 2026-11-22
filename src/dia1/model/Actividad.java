@@ -18,6 +18,11 @@ public abstract class Actividad implements Cobrable, Comparable<Actividad> {
             throw new IllegalArgumentException("El nombre es obligatorio.");
         if (!(tarifaBase > 0) || Double.isInfinite(tarifaBase))
             throw new IllegalArgumentException("La tarifa debe ser mayor que cero.");
+        // validacion en constructor Actividad. para claude: ¿donde va esto, aqui o en el constructor Actividad?
+        // o ¿cualquiera de los dos?
+        if(tarifaBase > 100000) {
+            throw new IllegalArgumentException("Tarifa debe ser menor a 100000");
+        }
         if (cupoTotal <= 0)
             throw new IllegalArgumentException("El cupo debe ser mayor que cero.");
         if (inscritos < 0 || inscritos > cupoTotal)
@@ -42,6 +47,11 @@ public abstract class Actividad implements Cobrable, Comparable<Actividad> {
         inscritos++;
     }
 
+    @Override
+    public int compareTo(Actividad otra) {
+        return Integer.compare(getCuposDisponibles(), otra.getCuposDisponibles());
+    }
+
     public abstract TipoActividad getTipo();
 
     @Override
@@ -59,11 +69,6 @@ public abstract class Actividad implements Cobrable, Comparable<Actividad> {
         return String.format("%s | %s | %s | tarifa %.2f | %d/%d",
                 codigo, nombre, getTipo(), calcularTarifaFinal(), inscritos, cupoTotal);
     }
-
-    public int compareTo(Actividad a){
-        return Integer.compare(this.getCuposDisponibles(), a.getCuposDisponibles());
-    }
-
 
 
 }
