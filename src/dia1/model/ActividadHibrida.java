@@ -1,7 +1,5 @@
 package dia1.model;
 
-import java.util.Collections;
-
 
 public class ActividadHibrida extends Actividad {
     private static final double RECARGO_MATERIAL = 750;
@@ -17,12 +15,9 @@ public class ActividadHibrida extends Actividad {
 
     @Override
     public TipoActividad getTipo() {
-        return TipoActividad.PRESENCIAL;
+        return TipoActividad.Hibrida;
     }
 
-    public int compareTo(Actividad a){
-        return Integer.compare(this.getCuposDisponibles(), a.getCuposDisponibles());
-    }
 
 
 }

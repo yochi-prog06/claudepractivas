@@ -5,6 +5,7 @@ import dia1.service.Gestor;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -54,17 +55,19 @@ public class Main {
         // 8. Contar
         System.out.println("Numero : " + gestor.contar(a -> a.getTipo() == TipoActividad.VIRTUAL));
 
-        System.out.println(a02.compareTo(a01));
 
-        for (Actividad a : gestor.listar()) System.out.println(a);
+        List<Actividad> copia = gestor.listar();
+
+        for (Actividad a : copia) System.out.println(a);
 
         System.out.println("ordenado");
-        Collections.sort(gestor.listar());
+        Collections.sort(copia);
 
-        for (Actividad a : gestor.listar()) System.out.println(a);
+        for (Actividad a : copia) System.out.println(a);
 
         double TotalRecaudado = gestor.listar().stream().mapToDouble(Actividad::calcularTarifaFinal).sum();
         System.out.println("Total recaudad: " + TotalRecaudado);
-    }
 
+        gestor.listar().stream().map(a -> new Resumen(a.getNombre(), a.getCuposDisponibles())).forEach(System.out::println);
+    }
 }
