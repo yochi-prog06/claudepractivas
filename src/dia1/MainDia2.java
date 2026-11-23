@@ -12,7 +12,7 @@ public class MainDia2 {
     public static void main(String[] args) {
         try {
             // Aquí (y SOLO aquí) se elige TXT. Mañana se cambia por MySQL en esta línea.
-            RepositorioActividad repo = new RepositorioActividadTxt("datos/actividades.txt");
+            RepositorioActividadMySQL repo = new RepositorioActividadMySQL();
             ActividadService service = new ActividadService(repo);
             ActividadController controller = new ActividadController(service);
             SwingUtilities.invokeLater(() -> new VentanaActividades(controller).setVisible(true));
